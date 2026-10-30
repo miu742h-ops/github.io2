@@ -19,7 +19,7 @@
   --bg-3: #1a1817;
   --text: #f2ede4;
   --muted: #767270;
-  --accent: #ffcc00; /* Фирменный желтый */
+  --accent: #ffcc00; 
   --border: rgba(242, 237, 228, 0.08);
   --font-display: 'Bodoni Moda', serif;
   --font-body: 'Inter', sans-serif;
@@ -29,7 +29,7 @@
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-weight: 400; overflow-x: hidden; cursor: none; line-height: 1.4; }
 body.menu-open, body.modal-open { overflow: hidden; }
-img { display: block; max-width: 100%; background-color: var(--bg-3); } /* Фон для img, чтобы не было пустоты */
+img { display: block; max-width: 100%; background-color: var(--bg-3); object-fit: cover; }
 a { color: inherit; text-decoration: none; }
 button { background: none; border: none; color: inherit; font-family: inherit; cursor: none; }
 ::selection { background: var(--accent); color: var(--bg); }
@@ -97,7 +97,6 @@ body::before {
 .hero-media { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
 .hero-media img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; filter: brightness(0.6) contrast(1.1); transform: scale(1.15); transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1); }
 body.loaded .hero-media img { transform: scale(1.05); }
-/* Усиленный градиент для читаемости текста */
 .hero-media::after { 
   content: ''; position: absolute; inset: 0; 
   background: linear-gradient(180deg, rgba(10,9,8,0.8) 0%, rgba(10,9,8,0.2) 30%, rgba(10,9,8,0.6) 60%, rgba(10,9,8,1) 100%), 
@@ -141,7 +140,7 @@ body.loaded .hero-media img { transform: scale(1.05); }
 
 /* ============ PRODUCTS ============ */
 .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(12px, 1.5vw, 24px); }
-.product { position: relative; display: block; }
+.product { position: relative; display: flex; flex-direction: column; }
 .product-media { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--bg-2); margin-bottom: 20px; }
 .product-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease; }
 .product-img-hover { position: absolute; inset: 0; opacity: 0; }
@@ -149,13 +148,20 @@ body.loaded .hero-media img { transform: scale(1.05); }
 .product:hover .product-img-main { opacity: 0; }
 .product-badge { position: absolute; top: 16px; left: 16px; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; padding: 6px 12px; background: var(--bg); color: var(--text); z-index: 2; }
 .product-badge.accent { background: var(--accent); color: var(--bg); }
-.quick-add { position: absolute; left: 16px; right: 16px; bottom: 16px; padding: 14px; background: var(--text); color: var(--bg); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; transform: translateY(calc(100% + 16px)); transition: transform 0.4s cubic-bezier(0.65, 0, 0.35, 1), background 0.3s; z-index: 2; }
-.product:hover .quick-add { transform: translateY(0); }
-.quick-add:hover { background: var(--accent); }
-.quick-add.added { background: var(--accent); }
-.product-info { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+
+.product-info { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 16px; }
 .product-name { font-size: 14px; font-weight: 500; letter-spacing: 0.02em; }
 .product-price { font-size: 13px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* КНОПКА ВСЕГДА ВИДНА */
+.add-btn { 
+  width: 100%; padding: 14px; background: transparent; color: var(--text); 
+  border: 1px solid var(--border); font-size: 11px; font-weight: 600; 
+  letter-spacing: 0.1em; text-transform: uppercase; text-align: center; 
+  transition: all 0.3s; margin-top: auto;
+}
+.add-btn:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.add-btn.added { background: var(--accent); color: var(--bg); border-color: var(--accent); }
 
 /* ============ PHILOSOPHY ============ */
 .philosophy { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 8vw, 120px); align-items: center; padding: clamp(80px, 10vw, 140px) var(--pad); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
@@ -198,11 +204,11 @@ body.loaded .hero-media img { transform: scale(1.05); }
 .arrivals-track { display: flex; gap: clamp(12px, 1.5vw, 24px); overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 20px; cursor: grab; }
 .arrivals-track::-webkit-scrollbar { display: none; }
 .arrivals-track.dragging { cursor: grabbing; scroll-snap-type: none; }
-.arrival-card { flex: 0 0 clamp(260px, 28vw, 380px); scroll-snap-align: start; position: relative; }
+.arrival-card { flex: 0 0 clamp(260px, 28vw, 380px); scroll-snap-align: start; position: relative; display: flex; flex-direction: column; }
 .arrival-media { position: relative; aspect-ratio: 3/4; overflow: hidden; background: var(--bg-2); margin-bottom: 16px; }
 .arrival-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
 .arrival-card:hover .arrival-media img { transform: scale(1.05); }
-.arrival-info { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.arrival-info { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-bottom: 16px; }
 .arrival-name { font-size: 14px; font-weight: 500; }
 .arrival-price { font-size: 13px; color: var(--muted); }
 
@@ -305,8 +311,6 @@ body.loaded .hero-media img { transform: scale(1.05); }
   .hero-scroll { display: none; }
   .products { gap: 12px; }
   .product-info { flex-direction: column; gap: 4px; }
-  .quick-add { transform: translateY(0); position: relative; left: auto; right: auto; bottom: auto; margin-top: 12px; opacity: 0; height: 0; padding: 0; overflow: hidden; transition: all 0.3s; }
-  .product:hover .quick-add, .product:active .quick-add { height: auto; padding: 14px; opacity: 1; }
   .lookbook-item:nth-child(2), .lookbook-item:nth-child(3) { grid-column: span 6; aspect-ratio: 4/5; }
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
   .newsletter-form { flex-direction: column; gap: 8px; align-items: flex-start; }
@@ -365,9 +369,8 @@ body.loaded .hero-media img { transform: scale(1.05); }
 <!-- HERO -->
 <header class="hero">
   <div class="hero-media">
-    <!-- ВАЖНО: Если у вас нет папки images, замените эту ссылку на: https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=2000&q=85 -->
-    <!-- Либо загрузите свои картинки в папку images и назовите их vanta-front.png -->
-    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=2000&q=85" alt="VANTA 2026 Кампания" loading="eager">
+    <!-- ВАЖНО: Путь к картинке теперь правильный (папка images, файл vanta-front.png) -->
+    <img src="images/vanta-front.png" onerror="this.src='https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=2000&q=85'" alt="VANTA 2026 Кампания" loading="eager">
   </div>
   <div class="hero-content">
     <div class="hero-main">
@@ -412,67 +415,61 @@ body.loaded .hero-media img { transform: scale(1.05); }
       <span class="section-tag" data-reveal>Каталог / 01</span>
       <h2 class="section-title" data-reveal data-reveal-delay="1">Базовые <em>модели</em></h2>
     </div>
-    <a href="#collection" class="section-link" data-reveal data-reveal-delay="2">
-      Все модели
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-        <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.5"/>
-      </svg>
-    </a>
   </div>
 
   <div class="products">
     <!-- Product 1 -->
-    <article class="product" data-reveal data-id="p1" data-name="Футболка Ringer White" data-price="120" data-img="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80">
+    <article class="product" data-reveal data-id="p1" data-name="Футболка Ringer White" data-price="120" data-img="images/vanta-front.png">
       <div class="product-media">
         <span class="product-badge">Хит</span>
-        <img class="product-img-main" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80" alt="Футболка Ringer White" loading="lazy">
-        <img class="product-img-hover" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80" alt="Футболка Ringer White деталь" loading="lazy">
-        <button class="quick-add" onclick="addToCart(this)">В корзину +</button>
+        <img class="product-img-main" src="images/vanta-front.png" onerror="this.src='https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80'" alt="Футболка Ringer White" loading="lazy">
+        <img class="product-img-hover" src="images/vanta-back.png" onerror="this.src='https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80'" alt="Футболка Ringer White деталь" loading="lazy">
       </div>
       <div class="product-info">
         <div class="product-name">Ringer White</div>
         <div class="product-price">€120</div>
       </div>
+      <button class="add-btn" onclick="addToCart(this)">Добавить в корзину</button>
     </article>
 
     <!-- Product 2 -->
-    <article class="product" data-reveal data-reveal-delay="1" data-id="p2" data-name="Поло Heritage White" data-price="150" data-img="https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&q=80">
+    <article class="product" data-reveal data-reveal-delay="1" data-id="p2" data-name="Поло Heritage White" data-price="150" data-img="images/vanta-polo.png">
       <div class="product-media">
-        <img class="product-img-main" src="https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&q=80" alt="Поло Heritage White" loading="lazy">
-        <img class="product-img-hover" src="https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&q=80" alt="Поло Heritage White деталь" loading="lazy">
-        <button class="quick-add" onclick="addToCart(this)">В корзину +</button>
+        <img class="product-img-main" src="images/vanta-polo.png" onerror="this.src='https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&q=80'" alt="Поло Heritage White" loading="lazy">
+        <img class="product-img-hover" src="images/vanta-polo.png" onerror="this.src='https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&q=80'" alt="Поло Heritage White деталь" loading="lazy">
       </div>
       <div class="product-info">
         <div class="product-name">Heritage Polo</div>
         <div class="product-price">€150</div>
       </div>
+      <button class="add-btn" onclick="addToCart(this)">Добавить в корзину</button>
     </article>
 
     <!-- Product 3 -->
-    <article class="product" data-reveal data-reveal-delay="2" data-id="p3" data-name="Футболка Script Logo" data-price="115" data-img="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80">
+    <article class="product" data-reveal data-reveal-delay="2" data-id="p3" data-name="Футболка Script Logo" data-price="115" data-img="images/vanta-script.png">
       <div class="product-media">
         <span class="product-badge accent">Новинка</span>
-        <img class="product-img-main" src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80" alt="Футболка Script Logo" loading="lazy">
-        <img class="product-img-hover" src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80" alt="Футболка Script Logo деталь" loading="lazy">
-        <button class="quick-add" onclick="addToCart(this)">В корзину +</button>
+        <img class="product-img-main" src="images/vanta-script.png" onerror="this.src='https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80'" alt="Футболка Script Logo" loading="lazy">
+        <img class="product-img-hover" src="images/vanta-front.png" onerror="this.src='https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80'" alt="Футболка Script Logo деталь" loading="lazy">
       </div>
       <div class="product-info">
         <div class="product-name">Script Logo</div>
         <div class="product-price">€115</div>
       </div>
+      <button class="add-btn" onclick="addToCart(this)">Добавить в корзину</button>
     </article>
 
     <!-- Product 4 -->
-    <article class="product" data-reveal data-reveal-delay="3" data-id="p4" data-name="Футболка Back Logo" data-price="120" data-img="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80">
+    <article class="product" data-reveal data-reveal-delay="3" data-id="p4" data-name="Футболка Back Logo" data-price="120" data-img="images/vanta-back.png">
       <div class="product-media">
-        <img class="product-img-main" src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80" alt="Футболка Back Logo" loading="lazy">
-        <img class="product-img-hover" src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80" alt="Футболка Back Logo деталь" loading="lazy">
-        <button class="quick-add" onclick="addToCart(this)">В корзину +</button>
+        <img class="product-img-main" src="images/vanta-back.png" onerror="this.src='https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80'" alt="Футболка Back Logo" loading="lazy">
+        <img class="product-img-hover" src="images/vanta-script.png" onerror="this.src='https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80'" alt="Футболка Back Logo деталь" loading="lazy">
       </div>
       <div class="product-info">
         <div class="product-name">Back Logo</div>
         <div class="product-price">€120</div>
       </div>
+      <button class="add-btn" onclick="addToCart(this)">Добавить в корзину</button>
     </article>
   </div>
 </section>
@@ -480,7 +477,7 @@ body.loaded .hero-media img { transform: scale(1.05); }
 <!-- PHILOSOPHY -->
 <section class="philosophy" id="philosophy">
   <div class="philosophy-image" data-reveal>
-    <img src="https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=1200&q=85" alt="VANTA Студия" loading="lazy">
+    <img src="images/vanta-polo.png" onerror="this.src='https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=1200&q=85'" alt="VANTA Студия" loading="lazy">
   </div>
   <div class="philosophy-content">
     <span class="section-tag" data-reveal>Наша философия</span>
@@ -501,38 +498,32 @@ body.loaded .hero-media img { transform: scale(1.05); }
       <span class="section-tag" data-reveal>Редакция / 02</span>
       <h2 class="section-title" data-reveal data-reveal-delay="1">Лук<em>бук</em></h2>
     </div>
-    <a href="#lookbook" class="section-link" data-reveal data-reveal-delay="2">
-      Смотреть все
-      <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-        <path d="M2 8H14M14 8L9 3M14 8L9 13" stroke="currentColor" stroke-width="1.5"/>
-      </svg>
-    </a>
   </div>
 
   <div class="lookbook-grid">
     <div class="lookbook-item" data-reveal>
-      <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1400&q=85" alt="Лук 01" loading="lazy">
+      <img src="images/vanta-front.png" onerror="this.src='https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=1400&q=85'" alt="Лук 01" loading="lazy">
       <div class="lookbook-caption">
         <span>Образ 01</span>
         <h4>Базовый</h4>
       </div>
     </div>
     <div class="lookbook-item" data-reveal data-reveal-delay="1">
-      <img src="https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=1200&q=85" alt="Лук 02" loading="lazy">
+      <img src="images/vanta-polo.png" onerror="this.src='https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=1200&q=85'" alt="Лук 02" loading="lazy">
       <div class="lookbook-caption">
         <span>Образ 02</span>
         <h4>Поло</h4>
       </div>
     </div>
     <div class="lookbook-item" data-reveal data-reveal-delay="2">
-      <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=1200&q=85" alt="Лук 03" loading="lazy">
+      <img src="images/vanta-back.png" onerror="this.src='https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=1200&q=85'" alt="Лук 03" loading="lazy">
       <div class="lookbook-caption">
         <span>Образ 03</span>
         <h4>Сзади</h4>
       </div>
     </div>
     <div class="lookbook-item" data-reveal data-reveal-delay="3">
-      <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=1400&q=85" alt="Лук 04" loading="lazy">
+      <img src="images/vanta-script.png" onerror="this.src='https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=1400&q=85'" alt="Лук 04" loading="lazy">
       <div class="lookbook-caption">
         <span>Образ 04</span>
         <h4>Логотип</h4>
@@ -544,7 +535,7 @@ body.loaded .hero-media img { transform: scale(1.05); }
 <!-- EDITORIAL BANNER -->
 <section class="editorial" id="editorial">
   <div class="editorial-media">
-    <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=2000&q=85" alt="VANTA Кампания" loading="lazy">
+    <img src="images/vanta-back.png" onerror="this.src='https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=2000&q=85'" alt="VANTA Кампания" loading="lazy">
   </div>
   <div class="editorial-content">
     <span class="section-tag" data-reveal>Кампания 2026</span>
@@ -580,48 +571,48 @@ body.loaded .hero-media img { transform: scale(1.05); }
 
   <div class="arrivals-track" id="arrivals">
     <!-- Arrival 1 -->
-    <article class="arrival-card" data-id="a1" data-name="Футболка Script Logo" data-price="115" data-img="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80">
+    <article class="arrival-card" data-id="a1" data-name="Футболка Script Logo" data-price="115" data-img="images/vanta-script.png">
       <div class="arrival-media">
-        <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80" alt="Футболка Script Logo" loading="lazy">
-        <button class="quick-add" onclick="addToCart(this)">В корзину +</button>
+        <img src="images/vanta-script.png" onerror="this.src='https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80'" alt="Футболка Script Logo" loading="lazy">
       </div>
       <div class="arrival-info">
         <div class="arrival-name">Script Logo</div>
         <div class="arrival-price">€115</div>
       </div>
+      <button class="add-btn" onclick="addToCart(this)">Добавить в корзину</button>
     </article>
     <!-- Arrival 2 -->
-    <article class="arrival-card" data-id="a2" data-name="Поло Heritage White" data-price="150" data-img="https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&q=80">
+    <article class="arrival-card" data-id="a2" data-name="Поло Heritage White" data-price="150" data-img="images/vanta-polo.png">
       <div class="arrival-media">
-        <img src="https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&q=80" alt="Поло Heritage White" loading="lazy">
-        <button class="quick-add" onclick="addToCart(this)">В корзину +</button>
+        <img src="images/vanta-polo.png" onerror="this.src='https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=800&q=80'" alt="Поло Heritage White" loading="lazy">
       </div>
       <div class="arrival-info">
         <div class="arrival-name">Heritage Polo</div>
         <div class="arrival-price">€150</div>
       </div>
+      <button class="add-btn" onclick="addToCart(this)">Добавить в корзину</button>
     </article>
     <!-- Arrival 3 -->
-    <article class="arrival-card" data-id="a3" data-name="Футболка Ringer White" data-price="120" data-img="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80">
+    <article class="arrival-card" data-id="a3" data-name="Футболка Ringer White" data-price="120" data-img="images/vanta-front.png">
       <div class="arrival-media">
-        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80" alt="Футболка Ringer White" loading="lazy">
-        <button class="quick-add" onclick="addToCart(this)">В корзину +</button>
+        <img src="images/vanta-front.png" onerror="this.src='https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80'" alt="Футболка Ringer White" loading="lazy">
       </div>
       <div class="arrival-info">
         <div class="arrival-name">Ringer White</div>
         <div class="arrival-price">€120</div>
       </div>
+      <button class="add-btn" onclick="addToCart(this)">Добавить в корзину</button>
     </article>
     <!-- Arrival 4 -->
-    <article class="arrival-card" data-id="a4" data-name="Футболка Back Logo" data-price="120" data-img="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80">
+    <article class="arrival-card" data-id="a4" data-name="Футболка Back Logo" data-price="120" data-img="images/vanta-back.png">
       <div class="arrival-media">
-        <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80" alt="Футболка Back Logo" loading="lazy">
-        <button class="quick-add" onclick="addToCart(this)">В корзину +</button>
+        <img src="images/vanta-back.png" onerror="this.src='https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&q=80'" alt="Футболка Back Logo" loading="lazy">
       </div>
       <div class="arrival-info">
         <div class="arrival-name">Back Logo</div>
         <div class="arrival-price">€120</div>
       </div>
+      <button class="add-btn" onclick="addToCart(this)">Добавить в корзину</button>
     </article>
   </div>
 </section>
@@ -1049,7 +1040,7 @@ function updateCartUI() {
     const safeImg = item.img || 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=100&q=80';
     html += `
       <div class="cart-item">
-        <img src="${safeImg}" alt="${item.name}" class="cart-item-img">
+        <img src="${safeImg}" onerror="this.src='https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=100&q=80'" alt="${item.name}" class="cart-item-img">
         <div class="cart-item-info">
           <div class="cart-item-name">${item.name} ${item.qty > 1 ? `(x${item.qty})` : ''}</div>
           <div class="cart-item-price">€${(item.price * item.qty).toLocaleString()}</div>
