@@ -139,7 +139,6 @@ body.loaded .hero-media img { transform: scale(1.05); }
 .section-link:hover { color: var(--accent); border-color: var(--accent); }
 
 /* ============ PRODUCTS ============ */
-/* Изменено на 3 колонки */
 .products { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 2vw, 32px); }
 .product { position: relative; display: flex; flex-direction: column; }
 
@@ -282,7 +281,7 @@ body.loaded .hero-media img { transform: scale(1.05); }
   .hero-content { grid-template-columns: 1fr; gap: 32px; }
   .hero-cta { align-items: flex-start; }
   .hero-scroll { display: none; }
-  .products { grid-template-columns: 1fr; gap: 32px; } /* На мобильных 1 колонка для лучшего свайпа */
+  .products { grid-template-columns: 1fr; gap: 32px; }
   .product-info { flex-direction: row; }
   .footer-top { grid-template-columns: 1fr; gap: 32px; }
   .newsletter-form { flex-direction: column; gap: 8px; align-items: flex-start; }
@@ -336,10 +335,12 @@ body.loaded .hero-media img { transform: scale(1.05); }
   </div>
 </div>
 
-<!-- HERO -->
+<!-- HERO (БАННЕР) -->
 <header class="hero">
   <div class="hero-media">
-    <img src="images/vanta-front.png" onerror="this.src='https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=2000&q=85'" alt="VANTA 2026 Кампания" loading="eager">
+    <!-- Здесь стоит красивая стильная фотография с Unsplash. 
+         Если захотите вернуть свою картинку, просто поменяйте ссылку на images/ваш-файл.png -->
+    <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=2000&q=85" alt="VANTA 2026 Кампания" loading="eager">
   </div>
   <div class="hero-content">
     <div class="hero-main">
@@ -388,8 +389,8 @@ body.loaded .hero-media img { transform: scale(1.05); }
 
   <div class="products">
     
-    <!-- МОДЕЛЬ 1 (ПОЛО - 2 ФОТО) -->
-    <article class="product" data-reveal data-id="m1" data-name="Модель 1" data-price="150" data-img="images/vanta-polo.png">
+    <!-- МОДЕЛЬ 1 (ПОЛО) -->
+    <article class="product" data-reveal data-id="m1" data-name="Модель 1 (Поло)" data-price="150" data-img="images/vanta-polo.png">
       <div class="product-media">
         <span class="product-badge accent">Хит</span>
         <div class="product-slider">
@@ -410,8 +411,8 @@ body.loaded .hero-media img { transform: scale(1.05); }
       <button class="add-btn" onclick="addToCart(this)">Добавить в корзину</button>
     </article>
 
-    <!-- МОДЕЛЬ 2 -->
-    <article class="product" data-reveal data-reveal-delay="1" data-id="m2" data-name="Модель 2" data-price="120" data-img="images/vanta-front.png">
+    <!-- МОДЕЛЬ 2 (ФУТБОЛКА) -->
+    <article class="product" data-reveal data-reveal-delay="1" data-id="m2" data-name="Модель 2 (Футболка)" data-price="120" data-img="images/vanta-front.png">
       <div class="product-media">
         <div class="product-slider">
           <img src="images/vanta-front.png" onerror="this.src='https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80'" alt="Модель 2 - Вид спереди" class="product-slide" loading="lazy">
@@ -429,13 +430,14 @@ body.loaded .hero-media img { transform: scale(1.05); }
       <button class="add-btn" onclick="addToCart(this)">Добавить в корзину</button>
     </article>
 
-    <!-- МОДЕЛЬ 3 -->
-    <article class="product" data-reveal data-reveal-delay="2" data-id="m3" data-name="Модель 3" data-price="115" data-img="images/vanta-script.png">
+    <!-- МОДЕЛЬ 3 (ХУДИ) - ОБНОВЛЕНО -->
+    <article class="product" data-reveal data-reveal-delay="2" data-id="m3" data-name="Модель 3 (Худи)" data-price="180" data-img="images/vanta-hydi.png">
       <div class="product-media">
         <span class="product-badge">Новинка</span>
         <div class="product-slider">
-          <img src="images/vanta-script.png" onerror="this.src='https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80'" alt="Модель 3 - Лого" class="product-slide" loading="lazy">
-          <img src="images/vanta-front.png" onerror="this.src='https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80'" alt="Модель 3 - Деталь" class="product-slide" loading="lazy">
+          <!-- Используем ваши новые картинки худи -->
+          <img src="images/vanta-hydi.png" onerror="this.src='https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&q=80'" alt="Модель 3 - Худи" class="product-slide" loading="lazy">
+          <img src="images/vanta-backhydi.png" onerror="this.src='https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&q=80'" alt="Модель 3 - Худи сзади" class="product-slide" loading="lazy">
         </div>
         <div class="slider-dots">
           <div class="dot active"></div>
@@ -444,7 +446,7 @@ body.loaded .hero-media img { transform: scale(1.05); }
       </div>
       <div class="product-info">
         <div class="product-name">Модель 3</div>
-        <div class="product-price">€115</div>
+        <div class="product-price">€180</div>
       </div>
       <button class="add-btn" onclick="addToCart(this)">Добавить в корзину</button>
     </article>
@@ -455,7 +457,7 @@ body.loaded .hero-media img { transform: scale(1.05); }
 <!-- PHILOSOPHY -->
 <section class="philosophy" id="philosophy">
   <div class="philosophy-image" data-reveal>
-    <img src="images/vanta-polo.png" onerror="this.src='https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?w=1200&q=85'" alt="VANTA Студия" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=1200&q=85" alt="VANTA Студия" loading="lazy">
   </div>
   <div class="philosophy-content">
     <span class="section-tag" data-reveal>Наша философия</span>
@@ -472,7 +474,7 @@ body.loaded .hero-media img { transform: scale(1.05); }
 <!-- EDITORIAL BANNER -->
 <section class="editorial" id="editorial">
   <div class="editorial-media">
-    <img src="images/vanta-back.png" onerror="this.src='https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=2000&q=85'" alt="VANTA Кампания" loading="lazy">
+    <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=2000&q=85" alt="VANTA Кампания" loading="lazy">
   </div>
   <div class="editorial-content">
     <span class="section-tag" data-reveal>Кампания 2026</span>
@@ -525,7 +527,7 @@ body.loaded .hero-media img { transform: scale(1.05); }
         <li><a href="#collection">Новинки</a></li>
         <li><a href="#collection">Футболки</a></li>
         <li><a href="#collection">Поло</a></li>
-        <li><a href="#collection">Базовые</a></li>
+        <li><a href="#collection">Худи</a></li>
         <li><a href="#collection">Аксессуары</a></li>
       </ul>
     </div>
@@ -623,7 +625,7 @@ body.loaded .hero-media img { transform: scale(1.05); }
       </svg>
     </div>
     <div class="search-results" id="searchResults">
-      <p>Популярные запросы: <span style="color:var(--text)">Модель 1</span>, <span style="color:var(--text)">Модель 2</span>.</p>
+      <p>Популярные запросы: <span style="color:var(--text)">Модель 1</span>, <span style="color:var(--text)">Модель 2</span>, <span style="color:var(--text)">Модель 3</span>.</p>
     </div>
   </div>
 </div>
@@ -972,7 +974,7 @@ searchInput.addEventListener('input', (e) => {
       searchResults.innerHTML = `<p>По запросу <span style="color:var(--text)">"${query}"</span> ничего не найдено.</p>`;
     }
   } else {
-    searchResults.innerHTML = `<p>Популярные запросы: <span style="color:var(--text)">Модель 1</span>, <span style="color:var(--text)">Модель 2</span>.</p>`;
+    searchResults.innerHTML = `<p>Популярные запросы: <span style="color:var(--text)">Модель 1</span>, <span style="color:var(--text)">Модель 2</span>, <span style="color:var(--text)">Модель 3</span>.</p>`;
   }
   
   if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
